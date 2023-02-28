@@ -18,6 +18,7 @@ export default class Controller {
   }
 
   #configureWorker(worker) {
+    debugger
     let ready = false
     worker.onmessage = ({ data }) => {
       if ('READY' === data) {

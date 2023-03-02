@@ -9,6 +9,12 @@ export default class HandGestureService {
         this.#handVersion = handVersion
     }
 
+    async estimateHands(video) {
+        return this.#detector.estimateHands(video, {
+            flipHorizontal: true
+        })
+    }
+
     async initializeDetector() {
         if(this.#detector) return this.#detector
 
@@ -19,9 +25,11 @@ export default class HandGestureService {
             maxHands: 2
         }
 
-        const detector = await this.#handPoseDetection.createDetector(
+        this.#detector = await this.#handPoseDetection.createDetector(
             this.#handPoseDetection.SupportedModels.MediaPipeHands,
             dectorConfig
         )
+
+        return this.#detector
     }
 }

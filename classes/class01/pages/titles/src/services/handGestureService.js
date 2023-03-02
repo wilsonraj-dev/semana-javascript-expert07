@@ -17,7 +17,8 @@ export default class HandGestureService {
             //porcentagem de confiança do gesto (90%)
             9
         )
-        console.log({predictions})
+        //console.log({predictions})
+        return predictions.gestures
     }
 
     async * detectGestures(predictions) {
@@ -25,7 +26,13 @@ export default class HandGestureService {
             if(!hand.keypoints3D) continue
 
             const gestures = await this.estimate(hand.keypoints3D)
-            console.log({gestures})
+            if(!gestures.length) continue
+
+            const result = gestures.reduce (
+                (previous, current) => (previous.score > current.score) ? previous : current
+            )
+
+            console.log('detected', gestureStrings[result.name])
         }
     }
 

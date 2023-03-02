@@ -13,14 +13,14 @@ const camera = await Camera.init()
 
 const [rootPath] = window.location.href.split('/pages/')
 const factory = {
-  async initalize() {
+  async initialize() {
     return HandGestureController.initialize({
       camera,
       view: new HandGestureView(),
       service: new HandGestureService({
         fingerpose: window.fp,
         handPoseDetection: window.handPoseDetection,
-        handVersion: window.VERSION
+        handsVersion: window.VERSION
       })
     })
   }

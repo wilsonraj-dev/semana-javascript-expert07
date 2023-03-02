@@ -13,7 +13,11 @@ const factory = {
   async initalize() {
     return HandGestureController.initialize({
       view: new HandGestureView(),
-      service: new HandGestureService()
+      service: new HandGestureService({
+        fingerpose: window.fp,
+        handPoseDetection: window.handPoseDetection,
+        handVersion: window.VERSION
+      })
     })
   }
 }
